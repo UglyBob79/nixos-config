@@ -37,9 +37,6 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
-  
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -58,6 +55,29 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  # programs.firefox.enable = true;
+
+  # Enable Zsh system-wide
+  programs.zsh.enable = true;
+
+  # Enable oh-my-zsh with your preferred options
+  programs.zsh.ohMyZsh = {
+    enable = true;
+    theme = "bira";
+    plugins = [
+      "git"
+      "docker"
+    ];
+  };
+
+  # List packages installed in system profile.
+  # You can use https://search.nixos.org/ to find more packages (and options).
+  environment.systemPackages = with pkgs; [
+    git
+    wget
+    curl
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mattias = {
     isNormalUser = true;
@@ -65,15 +85,8 @@
     packages = with pkgs; [
       tree
     ];
+    shell = pkgs.zsh;
   };
-
-  # programs.firefox.enable = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    git
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
