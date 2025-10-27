@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/zsh.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -56,19 +57,6 @@
   # services.libinput.enable = true;
 
   # programs.firefox.enable = true;
-
-  # Enable Zsh system-wide
-  programs.zsh.enable = true;
-
-  # Enable oh-my-zsh with your preferred options
-  programs.zsh.ohMyZsh = {
-    enable = true;
-    theme = "bira";
-    plugins = [
-      "git"
-      "docker"
-    ];
-  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
