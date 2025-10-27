@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/zsh.nix
+      ./modules/docker.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -69,7 +70,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mattias = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "network" ];
     packages = with pkgs; [
       tree
     ];
