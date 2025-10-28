@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./modules/zsh.nix
       ./modules/docker.nix
+      ./modules/gollum.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -90,8 +91,17 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  gollum.enable = true;
+  gollum.port = 4567;
+  gollum.user = "wiki";
+  gollum.directory = "/var/lib/gollum";
+
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    22   # SSH
+    4567 # Gollum  
+  ];
+
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
