@@ -5,6 +5,6 @@
   programs.zsh.ohMyZsh = {
     enable = true;
     plugins = [ "git" "docker" ];
-    theme = "bira";
+    theme = "agnoster";
   };
 }
