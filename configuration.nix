@@ -11,6 +11,7 @@
       ./modules/zsh.nix
       ./modules/docker.nix
       ./modules/gollum.nix
+      ./modules/mounts.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
