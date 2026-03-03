@@ -12,6 +12,7 @@
       ./modules/docker.nix
       ./modules/gollum.nix
       ./modules/mounts.nix
+      ./modules/code-server.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -94,6 +95,11 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  codeServer.enable = true;
+  codeServer.port = 8080;
+  codeServer.user = "mattias";
+  codeServer.hashedPassword = "$argon2id$v=19$m=4096,t=3,p=1$dHpHUFVLZWtTbFB3cEd4RXh3UlBvUT09$DNCGM3VftzZvsbFddGSvB1pmxDNU2vSamXygx8K0wyk";  # Generate with: nix-shell -p libargon2 --run "echo -n 'yourpassword' | argon2 $(head -c 16 /dev/urandom | base64) -id -e"
+
   gollum.enable = true;
   gollum.port = 4567;
   gollum.user = "wiki";
@@ -102,7 +108,8 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     22   # SSH
-    4567 # Gollum  
+    4567 # Gollum
+    8080 # code-server
   ];
 
   # networking.firewall.allowedUDPPorts = [ ... ];
